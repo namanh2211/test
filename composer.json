@@ -2,7 +2,7 @@
     "name": "namanh/duan1",
     "autoload": {
         "psr-4": {
-            "App\\":"App/"
+            "App\\": "App/"
 
         }
     },
