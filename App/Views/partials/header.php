@@ -88,42 +88,18 @@ $userName = $isLoggedIn && isset($user['full_name']) ? htmlspecialchars($user['f
             </div>
             <div class="col-lg-4 col-6 text-left">
                 <!-- Form tìm kiếm -->
-                <form action="" method="GET" style="position: relative;" autocomplete="off">
-                    <div class="input-group">
-                        <input type="text" class="form-control" name="q" placeholder="Tìm kiếm sản phẩm..."
-                            value="<?php echo htmlspecialchars($searchTerm); ?>" required>
-                        <div class="input-group-append">
-                            <button type="submit" class="btn btn-primary">
-                                <i class="fa fa-search"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <!-- Khu vực hiển thị kết quả -->
-                    <?php if (!empty($searchResults)): ?>
-                        <div
-                            style="position: absolute; background: #fff; z-index: 1000; width: 100%; border: 1px solid #ddd; margin-top: 5px;">
-                            <?php foreach ($searchResults as $product): ?>
-                                <a href="/detail.php?id=<?php echo $product['id']; ?>"
-                                    style="text-decoration: none; color: black; display: block; padding: 10px; border-bottom: 1px solid #ddd;">
-                                    <div style="display: flex; align-items: center;">
-                                        <img src="<?php echo htmlspecialchars($product['image_path']); ?>"
-                                            alt="<?php echo htmlspecialchars($product['product_name']); ?>"
-                                            style="width: 50px; height: 50px; object-fit: cover; margin-right: 10px;">
-                                        <span><?php echo htmlspecialchars($product['product_name']); ?></span>
-                                        <span style="margin-left: auto; color: #007bff;">
-                                            <?php echo number_format($product['price'], 0, ',', '.'); ?> VND
-                                        </span>
-                                    </div>
-                                </a>
-                            <?php endforeach; ?>
-                        </div>
-                    <?php elseif (isset($_GET['q'])): ?>
-                        <div
-                            style="position: absolute; background: #fff; z-index: 1000; width: 100%; border: 1px solid #ddd; margin-top: 5px; padding: 10px;">
-                            Không tìm thấy sản phẩm nào.
-                        </div>
-                    <?php endif; ?>
-                </form>
+                <form action="/search" method="GET" style="position: relative;" autocomplete="off">
+    <div class="input-group">
+        <input type="text" class="form-control" name="q" placeholder="Tìm kiếm sản phẩm..." value="<?php echo htmlspecialchars($searchTerm); ?>" required>
+        <div class="input-group-append">
+            <button type="submit" class="btn btn-primary">
+                <i class="fa fa-search"></i>
+            </button>
+        </div>
+    </div>
+</form>
+
+
             </div>
             <div class="col-lg-4 col-6 text-right">
                 <p class="m-0">Customer Service</p>

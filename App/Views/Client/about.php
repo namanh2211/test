@@ -1,4 +1,4 @@
-<?php include('header.php'); ?> <!-- Bao gồm header nếu có -->
+<?php include __DIR__ . '/../partials/header.php'; ?> <!-- Bao gồm header -->
 
 <div class="container mt-5">
     <div class="text-center mb-4">
@@ -52,4 +52,26 @@
     </section>
 </div>
 
-<?php include('footer.php'); ?> <!-- Bao gồm footer nếu có -->
+<style>
+    h1 {
+    font-size: 2.5rem;
+    color: #333;
+}
+
+h2.text-primary {
+    color: #007bff;
+}
+
+p {
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+ul {
+    list-style-type: disc;
+    margin-left: 20px;
+}
+
+</style>
+
+<?php include __DIR__ . '/../partials/footer.php'; ?> <!-- Bao gồm footer -->

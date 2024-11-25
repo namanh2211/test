@@ -34,14 +34,16 @@ class ShopController {
 
         // Truyền dữ liệu vào view
         $user = isset($_SESSION['user']) ? $_SESSION['user'] : null;
-        render('Client/shop', [
+
+        // Gọi view và truyền dữ liệu
+        view('Client.shop', [
             'categories' => $categories,
             'products' => $products,
             'category_id' => $category_id,
             'current_page' => $current_page,
             'total_pages' => $total_pages,
             'user' => $user,
-            'isLoggedIn' => $isLoggedIn // Truyền trạng thái đăng nhập vào view
+            'isLoggedIn' => $isLoggedIn
         ]);
     }
 }
