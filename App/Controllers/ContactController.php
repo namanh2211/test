@@ -31,7 +31,7 @@ class ContactController
                 'subject' => trim($_POST['subject'] ?? ''),
                 'message' => trim($_POST['message'] ?? '')
             ];
-
+            
             // Kiểm tra từng trường
             if (empty($formData['name'])) {
                 $errors['name'] = 'Please enter your name.';
@@ -64,10 +64,11 @@ class ContactController
                 $formData['email'],
                 $formData['subject'],
                 $formData['message']
+                
 
                
             );
-            
+       
 
             if ($success) {
                 // Chuyển hướng với thông báo thành công
@@ -77,6 +78,7 @@ class ContactController
                 // Thêm lỗi lưu trữ dữ liệu
                 $errors['database'] = 'There was an error saving your message. Please try again.';
                 require __DIR__ . '/../Views/Client/contact.php';
+                
             }
         }
     }

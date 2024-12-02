@@ -121,6 +121,27 @@ switch ($requestUri) {
             $searchController = new App\Controllers\SearchController();
             $searchController->index();
             break;
+            //thanh toán 
+            case '/checkout':
+                // Nếu route là /checkout, gọi controller CheckoutController và phương thức index
+                require_once __DIR__ . '/app/Controllers/CheckoutController.php';
+                $CheckoutController = new App\Controllers\CheckoutController();
+                $CheckoutController->index();
+                break;
+
+                    case 'checkout':
+                        // Điều hướng đến trang checkout
+                        $CheckoutController = new \App\Controllers\CheckoutController();
+                        $CheckoutController->index();
+                        break;
+                
+                    case 'payment':
+                        // Điều hướng đến trang thanh toán
+                        $PaymentController = new \App\Controllers\PaymentController();
+                        $PaymentController->processPayment();
+                        break;
+        
+            
 
     default:
         http_response_code(404);

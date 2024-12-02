@@ -10,6 +10,8 @@ class AboutController
         $aboutModel = new AboutModel();
         $aboutData = $aboutModel->getAboutData();
 
+        
+
         require __DIR__ . '/../Views/Client/about.php';
     }
 }

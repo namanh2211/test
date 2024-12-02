@@ -22,5 +22,17 @@ class CartModel {
         // Trả về kết quả hoặc false nếu không tìm thấy
         return $stmt->fetch(PDO::FETCH_ASSOC); // Nếu không có sản phẩm, sẽ trả về false
     }
+    public function processOrder($userId, $cart, $paymentMethod) {
+        // Giả sử bạn sẽ lưu thông tin đơn hàng vào cơ sở dữ liệu
+        // Giả lập lưu đơn hàng vào DB và trả về mã đơn hàng mới tạo
+        $orderId = rand(1000, 9999);  // Tạo mã đơn hàng giả để minh họa
+
+        // Lưu thông tin đơn hàng vào cơ sở dữ liệu (bạn có thể sử dụng PDO hoặc ORM)
+        // Ví dụ:
+        // $db->query("INSERT INTO orders (user_id, payment_method, total_price) VALUES (?, ?, ?)", [$userId, $paymentMethod, $totalPrice]);
+
+        // Trả về ID đơn hàng vừa tạo
+        return $orderId;
+    }
     
 }
