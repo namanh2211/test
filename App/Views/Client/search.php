@@ -2,25 +2,22 @@
 
 <div class="container mt-5">
     <h2 class="mb-4">Search Results for "<?php echo htmlspecialchars($_GET['q'] ?? ''); ?>"</h2>
+    <?php if (isset($searchResults) && !empty($searchResults)): ?>
+    <h2>Kết quả tìm kiếm cho: "<?php echo htmlspecialchars($searchTerm); ?>"</h2>
+    <ul>
+        <?php foreach ($searchResults as $product): ?>
+            <li>
+                <h3><?php echo htmlspecialchars($product['product_name']); ?></h3>
+                <p>Giá: <?php echo number_format($product['price'], 0, ',', '.'); ?> VND</p>
+                <img src="<?php echo htmlspecialchars($product['image_path']); ?>" alt="<?php echo htmlspecialchars($product['product_name']); ?>" width="100">
+            </li>
+        <?php endforeach; ?>
+    </ul>
+<?php else: ?>
+    <p>Không tìm thấy sản phẩm nào với từ khóa "<?php echo htmlspecialchars($searchTerm); ?>"</p>
+<?php endif; ?>
 
-    <?php if (!empty($searchResults)): ?>
-        <div class="row">
-            <?php foreach ($searchResults as $product): ?>
-                <div class="col-md-4 mb-4">
-                    <div class="card">
-                        <img class="card-img-top" src="<?php echo htmlspecialchars($product['image_path']); ?>" alt="<?php echo htmlspecialchars($product['product_name']); ?>">
-                        <div class="card-body">
-                            <h5 class="card-title"><?php echo htmlspecialchars($product['product_name']); ?></h5>
-                            <p class="card-text"><?php echo number_format($product['price'], 0, ',', '.'); ?> VND</p>
-                            <a href="/detail?id=<?php echo $product['id']; ?>" class="btn btn-primary">View Details</a>
-                        </div>
-                    </div>
-                </div>
-            <?php endforeach; ?>
-        </div>
-    <?php else: ?>
-        <p>No products found for your search term.</p>
-    <?php endif; ?>
+
 </div>
-
+    
 <?php include __DIR__ . '/../partials/footer.php'; ?>

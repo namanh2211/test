@@ -11,6 +11,7 @@ class ProductModel {
     public function __construct() {
         $this->db = (new Database())->connect();  // Sử dụng lớp Database đã được import
     }
+    
 
     // Lấy sản phẩm nổi bật
     public function getFeaturedProducts() {
@@ -71,20 +72,18 @@ class ProductModel {
     }
 
     // Tìm kiếm sản phẩm theo từ khóa
-    public function searchProducts($keyword, $limit = 10) {
-        $query = "SELECT id, product_name, price, image_path 
-                  FROM products 
-                  WHERE product_name LIKE :keyword 
-                  LIMIT :limit";
-        $stmt = $this->db->prepare($query);
-    
-        $keyword = '%' . $keyword . '%';
-        $stmt->bindParam(':keyword', $keyword, PDO::PARAM_STR);
-        $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
-    
+    public function searchProducts($searchTerm)
+    {
+        // Giả sử tên sản phẩm là 'product_name'
+        $stmt = $this->db->prepare("SELECT * FROM products WHERE product_name LIKE :searchTerm");
+        $stmt->bindValue(':searchTerm', '%' . $searchTerm . '%', PDO::PARAM_STR);
         $stmt->execute();
+        
+        // Lấy tất cả kết quả tìm kiếm
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    
+    
     
 
     // Lấy các sản phẩm cùng loại

@@ -17,10 +17,13 @@
     <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4">
         <span class="bg-secondary pr-3">Contact Us</span>
     </h2>
+
     <div class="row px-xl-5">
-        <!-- Form liên hệ -->
         <div class="col-lg-7 mb-5">
             <div class="contact-form bg-light p-30">
+
+            
+
                 <!-- Hiển thị thông báo lỗi -->
                 <?php if (!empty($errors)): ?>
                     <div class="alert alert-danger">

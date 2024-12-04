@@ -17,7 +17,7 @@ if (!isset($_SESSION['user'])) {
             Giỏ hàng của bạn hiện tại đang trống.
         </div>
     <?php else: ?>
-        <form method="POST" action="index.php?action=submit_payment">
+        <form method="POST" action="/payment/momo">
             <h3>Thông tin giỏ hàng</h3>
             <table class="table">
                 <thead>
@@ -30,26 +30,31 @@ if (!isset($_SESSION['user'])) {
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($_SESSION['cart'] as $item): ?>
+                    <?php 
+                    $totalAmount = 0; // Biến lưu tổng tiền thanh toán
+                    foreach ($_SESSION['cart'] as $item): 
+                        $itemTotal = $item['quantity'] * $item['price'];
+                        $totalAmount += $itemTotal;
+                    ?>
                         <tr>
                             <td><img src="images/<?= $item['image'] ?>" width="100"></td>
                             <td><?= htmlspecialchars($item['product_name']) ?></td>
                             <td><?= $item['quantity'] ?></td>
                             <td><?= number_format($item['price'], 0, ',', '.') ?> VND</td>
-                            <td><?= number_format($item['quantity'] * $item['price'], 0, ',', '.') ?> VND</td>
+                            <td><?= number_format($itemTotal, 0, ',', '.') ?> VND</td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
             </table>
 
-           
-            
+            <!-- Trường ẩn cho tổng tiền thanh toán -->
+            <input type="hidden" name="amount" value="<?= $totalAmount ?>">
+
             <div class="form-group">
                 <label for="payment_method">Chọn phương thức thanh toán:</label>
                 <select class="form-control" id="payment_method" name="payment_method">
-                    <option value="bank">Chuyển khoản ngân hàng</option>
-                    <option value="paypal">PayPal</option>
                     <option value="cash_on_delivery">Thanh toán khi nhận hàng</option>
+                    <option value="momo">Thanh toán MoMo</option> <!-- Thêm phương thức thanh toán MoMo -->
                 </select>
             </div>
 

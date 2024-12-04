@@ -119,7 +119,7 @@ switch ($requestUri) {
 
         case '/search':
             $searchController = new App\Controllers\SearchController();
-            $searchController->index();
+            $searchController->search();
             break;
             //thanh toán 
             case '/checkout':
@@ -135,11 +135,8 @@ switch ($requestUri) {
                         $CheckoutController->index();
                         break;
                 
-                    case 'payment':
-                        // Điều hướng đến trang thanh toán
-                        $PaymentController = new \App\Controllers\PaymentController();
-                        $PaymentController->processPayment();
-                        break;
+
+                 
         
             
 

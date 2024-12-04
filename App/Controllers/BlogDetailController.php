@@ -17,6 +17,9 @@ class BlogDetailController
             echo "404 - Blog Post Not Found";
             return;
         }
+            // Kiểm tra xem người dùng đã đăng nhập chưa
+            $isLoggedIn = isset($_SESSION['user']);
+            $user = $isLoggedIn ? $_SESSION['user'] : null;
 
         // Chuyển dữ liệu qua view
         require __DIR__ . '/../Views/Client/blog_detail.php';

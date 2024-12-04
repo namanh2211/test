@@ -7,6 +7,13 @@ class ContactController
 {
     public function index()
     {
+        // Bắt đầu session
+        session_start();
+
+        // Kiểm tra trạng thái đăng nhập
+        $isLoggedIn = isset($_SESSION['user']);
+        $user = $isLoggedIn ? $_SESSION['user'] : null;
+
         // Khởi tạo biến lỗi và giá trị mặc định
         $errors = [];
         $formData = [
@@ -23,7 +30,9 @@ class ContactController
     public function submit()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // Khởi tạo mảng lỗi và lấy dữ liệu từ form
+            // Bắt đầu session
+            session_start();
+
             $errors = [];
             $formData = [
                 'name' => trim($_POST['name'] ?? ''),
@@ -64,22 +73,25 @@ class ContactController
                 $formData['email'],
                 $formData['subject'],
                 $formData['message']
-                
-
-               
             );
-       
 
             if ($success) {
-                // Chuyển hướng với thông báo thành công
                 header('Location: /contact?status=success');
                 exit();
             } else {
-                // Thêm lỗi lưu trữ dữ liệu
                 $errors['database'] = 'There was an error saving your message. Please try again.';
                 require __DIR__ . '/../Views/Client/contact.php';
-                
             }
         }
     }
+
+    public function logout()
+    {
+        // Hủy session và chuyển hướng về trang chủ
+        session_start();
+        session_destroy();
+        header('Location: /');
+        exit();
+    }
 }
+    
