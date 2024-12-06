@@ -135,7 +135,89 @@ switch ($requestUri) {
                         $CheckoutController->index();
                         break;
                 
+// admin
+// ADMIN
 
+case '/admin':
+    $adminController = new App\Controllers\Admin\AdminController();
+    $adminController->dashboard();
+    break;
+
+case '/login-admin':
+    $adminController = new App\Controllers\Admin\AdminController();
+    $adminController->login();
+    break;
+
+case '/list-category':
+    $adminController = new App\Controllers\Admin\CategoryController();
+    $adminController->listCategory();
+    break;
+
+case '/add-category':
+    $adminController = new App\Controllers\Admin\CategoryController();
+    $adminController->addCategory();  // Gọi phương thức addCategory
+    break;
+
+case '/update-category':
+    $adminController = new \App\Controllers\Admin\CategoryController();
+    $adminController->updateCategory();
+    break;
+    
+case '/edit-category':
+    $id = $_GET['id'] ?? null;
+    $adminController = new \App\Controllers\Admin\CategoryController();
+    $adminController->editCategory($id);
+    break;
+
+case '/delete-category':
+    $adminController = new App\Controllers\Admin\CategoryController();
+    $adminController->deleteCategory();
+    break;
+
+case '/list-user':
+    $adminController = new \App\Controllers\Admin\UserController();
+    $adminController->listUsers();
+    break;
+
+case '/list-product':
+    $adminController = new App\Controllers\Admin\ProductController();
+    $adminController->listProducts();
+    break;
+
+case '/products-search':
+    $adminController = new App\Controllers\Admin\ProductController();
+    $adminController->searchProducts();
+    break;
+
+case '/add-product':
+    $adminController = new App\Controllers\Admin\ProductController();
+    $adminController->addProduct();
+    break;   
+
+case '/update-product':
+    $adminController = new \App\Controllers\Admin\ProductController();
+    $adminController->updateProduct();
+    break;
+        
+case '/add-user':
+    $adminController = new \App\Controllers\Admin\UserController();
+    $adminController->addUser();
+    break;
+
+case '/delete-user':
+    $adminController = new \App\Controllers\Admin\UserController();
+    $adminController->deleteUser();
+    break;
+
+case '/reset-password':
+    $adminController = new \App\Controllers\Admin\UserController();
+    $adminController->resetPassword();
+    break;
+
+case '/update-user':
+    $adminController = new \App\Controllers\Admin\UserController();
+    $adminController->updateUser();
+    break;
                  
         
             
