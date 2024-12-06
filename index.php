@@ -134,6 +134,12 @@ switch ($requestUri) {
                         $CheckoutController = new \App\Controllers\CheckoutController();
                         $CheckoutController->index();
                         break;
+
+                        case '/payment':
+                            $PaymentController = new \App\Controllers\PaymentController();
+                            $PaymentController->index();
+                            break;
+
                 
 // admin
 // ADMIN

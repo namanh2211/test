@@ -17,33 +17,46 @@ class CartController
 
     // Hiển thị giỏ hàng
     public function index() {
+        
         // Kiểm tra giỏ hàng có trong session không
         $cartItems = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
-    
+        
         // Tính tổng tiền từ các sản phẩm trong giỏ hàng
         $subtotal = 0;
-    
+        
         foreach ($cartItems as $key => $item) {
-
             if (isset($item['id'])) {
-            // Lấy thông tin sản phẩm từ cơ sở dữ liệu
-            $product = $this->cartModel->getProductById($item['id']);
-            if ($product) {
-                $item['product_name'] = $product['product_name'];
-                $item['price'] = $product['price'];
-                $item['image'] = $product['image_path']; // Đảm bảo sử dụng image_path từ cơ sở dữ liệu
-                $subtotal += $product['price'] * $item['quantity']; // Tính tổng tiền giỏ hàng
+                // Lấy thông tin sản phẩm từ cơ sở dữ liệu
+                $product = $this->cartModel->getProductById($item['id']);
+                if ($product) {
+                    $item['product_name'] = $product['product_name'];
+                    $item['price'] = $product['price'];
+                    $item['image'] = $product['image_path']; // Đảm bảo sử dụng image_path từ cơ sở dữ liệu
+                    $subtotal += $product['price'] * $item['quantity']; // Tính tổng tiền giỏ hàng
+                  
+                } else {
+                    echo "Sản phẩm không tồn tại trong cơ sở dữ liệu.";
+                }
             } else {
-                echo "Sản phẩm không tồn tại trong cơ sở dữ liệu.";
+                echo "Giỏ hàng có sản phẩm thiếu ID.";
             }
-        }else{
-            echo "Giỏ hàng có sản phẩm thiếu ID.";
         }
-    }
 
-    // Render view giỏ hàng với danh sách sản phẩm và tổng tiền
-    renderView('Client/cart', compact('cartItems', 'subtotal'));
-}
+         // Kiểm tra xem người dùng đã đăng nhập chưa
+         if (isset($_SESSION['user'])) {
+            $user = $_SESSION['user']; // Lấy thông tin người dùng từ session
+            $isLoggedIn = true;  // Đánh dấu người dùng đã đăng nhập
+        } else {
+            $user = null;
+            $isLoggedIn = false; // Nếu không có session, coi như chưa đăng nhập
+        }
+        
+
+    
+        // Render view giỏ hàng với danh sách sản phẩm, tổng tiền, và tên người dùng
+        renderView('Client/cart', compact('cartItems', 'subtotal', 'user', 'isLoggedIn'));
+    }
+    
 
     // Xóa sản phẩm khỏi giỏ hàng
     public function remove()

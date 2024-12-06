@@ -22,6 +22,7 @@ class CartModel {
         // Trả về kết quả hoặc false nếu không tìm thấy
         return $stmt->fetch(PDO::FETCH_ASSOC); // Nếu không có sản phẩm, sẽ trả về false
     }
+    
     public function processOrder($userId, $cart, $paymentMethod) {
         // Giả sử bạn sẽ lưu thông tin đơn hàng vào cơ sở dữ liệu
         // Giả lập lưu đơn hàng vào DB và trả về mã đơn hàng mới tạo

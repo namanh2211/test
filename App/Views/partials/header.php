@@ -1,5 +1,6 @@
 <?php
 use App\Helpers\SessionHelper;
+
 // Xác định đường dẫn chính xác
 $databasePath = __DIR__ . '/../../../config/database.php';
 
@@ -30,9 +31,9 @@ if (isset($_GET['q']) && !empty($_GET['q']) && isset($conn)) {
 if (!isset($isLoggedIn)) {
     $isLoggedIn = false;
 }
-$userName = $isLoggedIn && isset($user['full_name']) ? htmlspecialchars($user['full_name']) : null;
-// Kiểm tra xem người dùng đã đăng nhập chưa
-$isLoggedIn = isset($_SESSION['user']);
+// $userName = $isLoggedIn && isset($user['full_name']) ? htmlspecialchars($user['full_name']) : null;
+// // Kiểm tra xem người dùng đã đăng nhập chưa
+// $isLoggedIn = isset($_SESSION['user']);
 ?>
 
 
@@ -91,15 +92,16 @@ $isLoggedIn = isset($_SESSION['user']);
             <div class="col-lg-4 col-6 text-left">
                 <!-- Form tìm kiếm -->
                 <form action="/search" method="GET" style="position: relative;" autocomplete="off">
-    <div class="input-group">
-        <input type="text" class="form-control" name="q" placeholder="Tìm kiếm sản phẩm..." value="<?php echo htmlspecialchars($searchTerm ?? ''); ?>" required>
-        <div class="input-group-append">
-            <button type="submit" class="btn btn-primary">
-                <i class="fa fa-search"></i>
-            </button>
-        </div>
-    </div>
-</form>
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="q" placeholder="Tìm kiếm sản phẩm..."
+                            value="<?php echo htmlspecialchars($searchTerm ?? ''); ?>" required>
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
 
 
 
@@ -152,8 +154,8 @@ $isLoggedIn = isset($_SESSION['user']);
                                 <a href="/login" class="user-login text-white px-0 ml-3">
                                     <i class="fas fa-user text-primary"></i> Đăng nhập
                                 </a>
-
                             <?php endif; ?>
+
                         </div>
                     </div>
                 </nav>

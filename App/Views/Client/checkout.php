@@ -17,7 +17,7 @@ if (!isset($_SESSION['user'])) {
             Giỏ hàng của bạn hiện tại đang trống.
         </div>
     <?php else: ?>
-        <form method="POST" action="/payment/momo">
+        <form method="POST" action="/payment">
             <h3>Thông tin giỏ hàng</h3>
             <table class="table">
                 <thead>

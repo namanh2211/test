@@ -3,6 +3,8 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 require __DIR__ . '/../partials/header.php';
+// Lấy tên người dùng từ session (nếu có)
+$userName = $_SESSION['user']['full_name'] ?? null;
 ?>
 
 <div class="container-fluid">

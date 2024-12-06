@@ -28,6 +28,10 @@ class CheckoutController {
         // Lấy dữ liệu giỏ hàng từ session
         $cart = $_SESSION['cart'];
 
+           // Kiểm tra xem người dùng đã đăng nhập chưa
+           $isLoggedIn = isset($_SESSION['user']);
+           $user = $isLoggedIn ? $_SESSION['user'] : null;
+
         // Bao gồm view checkout.php
         require __DIR__ . '/../Views/Client/checkout.php';
     }
