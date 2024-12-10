@@ -34,36 +34,46 @@ class AuthController {
     // Xử lý logic đăng nhập
     public function login() {
         SessionHelper::start();
-
+    
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $username = $_POST['username'] ?? '';
             $password = $_POST['password'] ?? '';
-
+    
+            // Kiểm tra các trường trống
             if (empty($username)) {
                 $_SESSION['error_username'] = "Username không được để trống";
             }
             if (empty($password)) {
                 $_SESSION['error_password'] = "Password không được để trống";
             }
-
+    
+            // Nếu không có lỗi, kiểm tra thông tin đăng nhập
             if (empty($_SESSION['error_username']) && empty($_SESSION['error_password'])) {
                 $user = $this->userModel->getUserByUsername($username);
-
+    
                 if ($user && password_verify($password, $user['password'])) {
+                    // Lưu thông tin user vào session
                     $_SESSION['user'] = $user;
-                    header('Location: /home');
+    
+                    // Kiểm tra vai trò để điều hướng
+                    if ($user['role'] === 'admin') {
+                        header('Location: /admin'); // Admin vào trang admin
+                    } else {
+                        header('Location: /home'); // Khách hàng vào trang client
+                    }
                     exit;
                 } else {
                     $_SESSION['error_password'] = "Sai username hoặc password";
                 }
             }
-
+    
+            // Quay lại trang login nếu có lỗi
             header('Location: /login');
             exit;
         }
     }
 
-    // Xử lý logic đăng ký
+    // Xử lý logic đăng ký (giữ nguyên như cũ)
     public function register() {
         SessionHelper::start();
 
@@ -133,15 +143,16 @@ class AuthController {
             exit;
         }
     }
-      // Xử lý logout
-      public function logout() {
+
+    // Xử lý logout
+    public function logout() {
         SessionHelper::start();
 
         // Xóa thông tin user trong session
         unset($_SESSION['user']);
 
-        // Chuyển hướng về trang chủ hoặc login
+        // Chuyển hướng về trang login
         header('Location: /login');
         exit;
-      }
+    }
 }
