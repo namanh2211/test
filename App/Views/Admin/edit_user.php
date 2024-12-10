@@ -19,7 +19,7 @@
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <h2>CHỈNH SỬA NGƯỜI DÙNG</h2>
                 <div>
-                    <a href="#" class="me-3 text-decoration-none">Trang chủ</a>
+                    <a href="/admin" class="me-3 text-decoration-none">Trang chủ</a>
                     <span> > Chỉnh sửa người dùng</span>
                 </div>
                 <div class="avatar bg-warning rounded-circle" style="width: 40px; height: 40px;"></div>

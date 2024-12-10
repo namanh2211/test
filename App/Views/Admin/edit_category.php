@@ -32,7 +32,7 @@ unset($_SESSION['old_data']);
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <h2>CẬP NHẬT LOẠI SẢN PHẨM</h2>
                 <div>
-                    <a href="#" class="me-3 text-decoration-none">Trang chủ</a>
+                    <a href="/admin" class="me-3 text-decoration-none">Trang chủ</a>
                     <span> > Sửa loại sản phẩm</span>
                 </div>
                 <div class="avatar bg-warning rounded-circle" style="width: 40px; height: 40px;"></div>

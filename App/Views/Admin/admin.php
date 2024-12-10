@@ -34,11 +34,14 @@
             <div class="d-flex justify-content-between align-items-center">
                 <h2>THỐNG KÊ</h2>
                 <div>
-                    <a href="#" class="me-3 text-decoration-none">Trang chủ</a>
+                    <a href="/admin" class="me-3 text-decoration-none">Trang chủ</a>
                     <a href="#" class="text-decoration-none">Library</a>
+                    <!-- Nút trở về Client -->
+                    <a href="/home" class="btn btn-outline-secondary ms-3">Về Trang Client</a>
                 </div>
                 <div class="avatar bg-warning rounded-circle"></div>
             </div>
+
 
             <!-- Stats Cards -->
             <div class="row mt-4">

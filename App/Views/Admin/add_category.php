@@ -27,7 +27,7 @@ unset($_SESSION['success_message']);
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <h2>Thêm danh mục</h2>
                 <div>
-                    <a href="#" class="me-3 text-decoration-none">Trang chủ</a>
+                    <a href="/admin" class="me-3 text-decoration-none">Trang chủ</a>
                     <span> > Thêm danh mục</span>
                 </div>
                 <div class="avatar bg-warning rounded-circle" style="width: 40px; height: 40px;"></div>
