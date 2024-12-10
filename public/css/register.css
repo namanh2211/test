@@ -1,0 +1,14 @@
+.card-header>h2{
+    color: #17a2b8;
+}
+.card-body>form{
+    color: #17a2b8;
+}
+button{
+    background-color: #17a2b8;
+    color: black;
+    border: none;
+}
+.login-here{
+    color: #17a2b8;
+}

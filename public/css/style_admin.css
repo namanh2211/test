@@ -1,0 +1,43 @@
+#sidebar {
+    width: 250px;
+    height: 100vh;
+    position: fixed;
+}
+
+#content {
+    margin-left: 250px;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+}
+
+.chart-placeholder {
+    height: 200px;
+    background-color: #f5f5f5;
+    border: 1px dashed #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.sub-menu {
+    display: none;
+    padding-left: 20px;
+    opacity: 0;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.nav-link {
+    color: white;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.nav-item:hover > .nav-link {
+    background-color: #666769;
+    color: #f8f9fa;
+}
+
+.text-align-center{
+    text-align: center;
+}
