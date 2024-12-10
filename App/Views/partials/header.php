@@ -30,29 +30,23 @@ if (isset($_GET['q']) && !empty($_GET['q']) && isset($conn)) {
         $stmt->execute(['searchTerm' => '%' . $searchTerm . '%']);
         $searchResults = $stmt->fetchAll(PDO::FETCH_ASSOC);
     } catch (Exception $e) {
-        error_log("Database Query Error: " . $e->getMessage());
+        error_log("Lỗi truy vấn cơ sở dữ liệu: " . $e->getMessage());
     }
 }
 
-// Xử lý thông tin người dùng đăng nhập
-$isLoggedIn = false;
-$user = null;
-
-if (isset($_SESSION['user'])) {
-    $isLoggedIn = true;
-    $user = $_SESSION['user']; // Đảm bảo user chứa đầy đủ thông tin (bao gồm role)
+if (!isset($isLoggedIn)) {
+    $isLoggedIn = false;
 }
 ?>
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 
 <head>
     <meta charset="utf-8">
-    <title>MultiShop - Online Shop Website Template</title>
+    <title>HMT Shop - Mua sắm trực tuyến</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="Free HTML Templates" name="keywords">
-    <meta content="Free HTML Templates" name="description">
+    <meta content="Mua sắm trực tuyến" name="keywords">
+    <meta content="Trang web mua sắm trực tuyến tốt nhất" name="description">
 
     <!-- Favicon -->
     <link href="/public/img/favicon.ico" rel="icon">
@@ -95,31 +89,28 @@ if (isset($_SESSION['user'])) {
                 </a>
             </div>
             <div class="col-lg-4 col-6 text-left">
-    <!-- Form tìm kiếm -->
-    <form action="/search" method="GET" style="position: relative;" autocomplete="off">
-    <div class="input-group">
-        <input type="text" class="form-control" name="q" placeholder="Tìm kiếm sản phẩm..."
-               value="<?php echo htmlspecialchars($searchTerm ?? ''); ?>" required>
-        <div class="input-group-append">
-            <button type="submit" class="btn btn-primary">
-                <i class="fa fa-search"></i>
-            </button>
-        </div>
-    </div>
-</form>
-</div>
-
-
-
+                <!-- Form tìm kiếm -->
+                <form action="/search" method="GET" style="position: relative;" autocomplete="off">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="q" placeholder="Tìm kiếm sản phẩm..."
+                            value="<?php echo htmlspecialchars($searchTerm ?? ''); ?>" required>
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
             <div class="col-lg-4 col-6 text-right">
-                <p class="m-0">Customer Service</p>
+                <p class="m-0">Hỗ trợ khách hàng</p>
                 <h5 class="m-0">0774901624</h5>
             </div>
         </div>
     </div>
-    <!-- Topbar End -->
+    <!-- Thanh trên cùng Kết thúc -->
 
-    <!-- Navbar Start -->
+    <!-- Thanh điều hướng Bắt đầu -->
     <div class="container-fluid bg-dark mb-30">
         <div class="row px-xl-5">
             <div class="col-lg-12">
@@ -133,14 +124,14 @@ if (isset($_SESSION['user'])) {
                     </button>
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav mr-auto py-0">
-                            <a href="/" class="nav-item nav-link active">Home</a>
-                            <a href="/shop" class="nav-item nav-link">Shop</a>
-                            <a href="/contact" class="nav-item nav-link">Contact</a>
-                            <a href="/about" class="nav-item nav-link">About us</a>
-                            <a href="/blog" class="nav-item nav-link">Blog</a>
+                            <a href="/" class="nav-item nav-link active">Trang chủ</a>
+                            <a href="/shop" class="nav-item nav-link">Cửa hàng</a>
+                            <a href="/contact" class="nav-item nav-link">Liên hệ</a>
+                            <a href="/about" class="nav-item nav-link">Về chúng tôi</a>
+                            <a href="/blog" class="nav-item nav-link">Bài viết</a>
                         </div>
                         <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
-                            <a href="/favorite-products" class="btn px-0">
+                            <a href="/favorite_products.php" class="btn px-0">
                                 <i class="fas fa-heart text-primary"></i>
                                 <span class="badge text-secondary border border-secondary rounded-circle"
                                     style="padding-bottom: 2px;">0</span>
@@ -164,7 +155,6 @@ if (isset($_SESSION['user'])) {
                                     <i class="fas fa-user text-primary"></i> Đăng nhập
                                 </a>
                             <?php endif; ?>
-
                         </div>
                     </div>
                 </nav>

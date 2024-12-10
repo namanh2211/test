@@ -102,7 +102,6 @@ switch ($requestUri) {
         $contactController = new App\Controllers\ContactController();
         $contactController->index();
         break;
-
     case '/contact/submit':
         $contactController = new App\Controllers\ContactController();
         $contactController->submit();

@@ -10,8 +10,8 @@
                         <p class="card-text">
                             <?php echo htmlspecialchars($post['summary']); ?>
                         </p>
-                        <p class="card-text"><small class="text-muted">Published on <?php echo date('F d, Y', strtotime($post['created_at'])); ?></small></p>
-                        <a href="/blog/detail?id=<?php echo $post['id']; ?>" class="btn btn-primary">Read More</a>
+                        <p class="card-text"><small class="text-muted">Được đăng vào ngày <?php echo date('d F, Y', strtotime($post['created_at'])); ?></small></p>
+                        <a href="/blog/detail?id=<?php echo $post['id']; ?>" class="btn btn-primary">Đọc tiếp</a>
                     </div>
                 </div>
             </div>

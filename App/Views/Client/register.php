@@ -1,6 +1,5 @@
 <?php
 
-
 $errors = isset($_SESSION['errors']) ? $_SESSION['errors'] : [];
 $old = isset($_SESSION['old']) ? $_SESSION['old'] : [];
 
@@ -9,10 +8,10 @@ unset($_SESSION['errors']);
 unset($_SESSION['old']);
 ?>
 <!doctype html>
-<html lang="en">
+<html lang="vi">
 
 <head>
-    <title>Register</title>
+    <title>Đăng Ký</title>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -27,12 +26,12 @@ unset($_SESSION['old']);
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-header text-center">
-                        <h2>Register</h2>
+                        <h2>Đăng Ký Tài Khoản</h2>
                     </div>
                     <div class="card-body">
                         <form action="/register-xuly" method="POST">
                             <div class="mb-3">
-                                <label for="full_name" class="form-label">Full Name</label>
+                                <label for="full_name" class="form-label">Họ và Tên</label>
                                 <input type="text" id="full_name" name="full_name" class="form-control"
                                     value="<?php echo isset($old['full_name']) ? htmlspecialchars($old['full_name']) : ''; ?>">
                                 <?php if (isset($errors['full_name'])): ?>
@@ -40,7 +39,7 @@ unset($_SESSION['old']);
                                 <?php endif; ?>
                             </div>
                             <div class="mb-3">
-                                <label for="address" class="form-label">Address</label>
+                                <label for="address" class="form-label">Địa Chỉ</label>
                                 <input type="text" id="address" name="address" class="form-control"
                                     value="<?php echo isset($old['address']) ? htmlspecialchars($old['address']) : ''; ?>">
                                 <?php if (isset($errors['address'])): ?>
@@ -48,7 +47,7 @@ unset($_SESSION['old']);
                                 <?php endif; ?>
                             </div>
                             <div class="mb-3">
-                                <label for="phone" class="form-label">Phone</label>
+                                <label for="phone" class="form-label">Số Điện Thoại</label>
                                 <input type="text" id="phone" name="phone" class="form-control"
                                     value="<?php echo isset($old['phone']) ? htmlspecialchars($old['phone']) : ''; ?>">
                                 <?php if (isset($errors['phone'])): ?>
@@ -56,7 +55,7 @@ unset($_SESSION['old']);
                                 <?php endif; ?>
                             </div>
                             <div class="mb-3">
-                                <label for="username" class="form-label">Username</label>
+                                <label for="username" class="form-label">Tên Đăng Nhập</label>
                                 <input type="text" id="username" name="username" class="form-control"
                                     value="<?php echo isset($old['username']) ? htmlspecialchars($old['username']) : ''; ?>">
                                 <?php if (isset($errors['username'])): ?>
@@ -72,24 +71,24 @@ unset($_SESSION['old']);
                                 <?php endif; ?>
                             </div>
                             <div class="mb-3">
-                                <label for="password" class="form-label">Password</label>
+                                <label for="password" class="form-label">Mật Khẩu</label>
                                 <input type="password" id="password" name="password" class="form-control">
                                 <?php if (isset($errors['password'])): ?>
                                     <small class="text-danger"><?php echo $errors['password']; ?></small>
                                 <?php endif; ?>
                             </div>
                             <div class="mb-3">
-                                <label for="confirm_password" class="form-label">Confirm Password</label>
+                                <label for="confirm_password" class="form-label">Nhập Lại Mật Khẩu</label>
                                 <input type="password" id="confirm_password" name="confirm_password"
                                     class="form-control">
                                 <?php if (isset($errors['confirm_password'])): ?>
                                     <small class="text-danger"><?php echo $errors['confirm_password']; ?></small>
                                 <?php endif; ?>
                             </div>
-                            <button type="submit" class="w-100 btn btn-primary">Register</button>
+                            <button type="submit" class="w-100 btn btn-primary">Đăng Ký</button>
                         </form>
                         <div class="text-center mt-3">
-                            <p>Already have an account? <a href="/login">Login here</a></p>
+                            <p>Bạn đã có tài khoản? <a href="/login">Đăng nhập tại đây</a></p>
                         </div>
                     </div>
                 </div>
