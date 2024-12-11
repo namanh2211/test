@@ -28,9 +28,9 @@ class CheckoutController {
         // Lấy dữ liệu giỏ hàng từ session
         $cart = $_SESSION['cart'];
 
-           // Kiểm tra xem người dùng đã đăng nhập chưa
-           $isLoggedIn = isset($_SESSION['user']);
-           $user = $isLoggedIn ? $_SESSION['user'] : null;
+        // Kiểm tra xem người dùng đã đăng nhập chưa
+        $isLoggedIn = isset($_SESSION['user']);
+        $user = $isLoggedIn ? $_SESSION['user'] : null;
 
         // Bao gồm view checkout.php
         require __DIR__ . '/../Views/Client/checkout.php';
@@ -38,19 +38,35 @@ class CheckoutController {
 
     // Phương thức xử lý thanh toán khi người dùng chọn phương thức thanh toán
     public function payment() {
+        session_start();
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $paymentMethod = $_POST['payment_method'];
-            $totalAmount = $_POST['total_amount'];
+            $customer_name = $_POST['customer_name'] ?? '';
+            $customer_phone = $_POST['customer_phone'] ?? '';
+            $shipping_address = $_POST['shipping_address'] ?? '';
+            $payment_method = $_POST['payment_method'] ?? '';
+            $total_amount = $_POST['total_amount'] ?? 0;
 
-            // Kiểm tra và xử lý thanh toán
-            $paymentStatus = $this->paymentModel->processPayment($paymentMethod, $totalAmount);
+            // Kiểm tra dữ liệu đầu vào
+            if (empty($customer_name) || empty($customer_phone) || empty($shipping_address)) {
+                echo "<div class='alert alert-danger'>Vui lòng điền đầy đủ thông tin khách hàng!</div>";
+                return;
+            }
 
-            if ($paymentStatus) {
-                // Thanh toán thành công, chuyển hướng đến trang thành công
-                header('Location: success.php');
+            // Lưu thông tin khách hàng vào session để sử dụng trong PaymentController
+            $_SESSION['customer'] = [
+                'name' => $customer_name,
+                'phone' => $customer_phone,
+                'address' => $shipping_address,
+                'total_amount' => $total_amount,
+            ];
+
+            // Chuyển hướng đến PaymentController để xử lý thanh toán
+            if ($payment_method === 'momo') {
+                header('Location: /payment/processPayment');
+                exit;
             } else {
-                // Thanh toán thất bại
-                echo "<div class='alert alert-danger'>Thanh toán thất bại. Vui lòng thử lại.</div>";
+                echo "<div class='alert alert-danger'>Phương thức thanh toán không được hỗ trợ!</div>";
             }
         }
     }

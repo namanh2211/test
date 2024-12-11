@@ -1,6 +1,11 @@
 <?php
 use App\Helpers\SessionHelper;
 
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+
 // Xác định đường dẫn chính xác
 $databasePath = __DIR__ . '/../../../config/database.php';
 
@@ -28,14 +33,16 @@ if (isset($_GET['q']) && !empty($_GET['q']) && isset($conn)) {
         error_log("Database Query Error: " . $e->getMessage());
     }
 }
-if (!isset($isLoggedIn)) {
-    $isLoggedIn = false;
-}
-// $userName = $isLoggedIn && isset($user['full_name']) ? htmlspecialchars($user['full_name']) : null;
-// // Kiểm tra xem người dùng đã đăng nhập chưa
-// $isLoggedIn = isset($_SESSION['user']);
-?>
 
+// Xử lý thông tin người dùng đăng nhập
+$isLoggedIn = false;
+$user = null;
+
+if (isset($_SESSION['user'])) {
+    $isLoggedIn = true;
+    $user = $_SESSION['user']; // Đảm bảo user chứa đầy đủ thông tin (bao gồm role)
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -61,8 +68,6 @@ if (!isset($isLoggedIn)) {
     <link href="/public/lib/animate/animate.min.css" rel="stylesheet">
     <link href="/public/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-
-
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="/public/css/style.css" rel="stylesheet">
@@ -90,22 +95,22 @@ if (!isset($isLoggedIn)) {
                 </a>
             </div>
             <div class="col-lg-4 col-6 text-left">
-                <!-- Form tìm kiếm -->
-                <form action="/search" method="GET" style="position: relative;" autocomplete="off">
-                    <div class="input-group">
-                        <input type="text" class="form-control" name="q" placeholder="Tìm kiếm sản phẩm..."
-                            value="<?php echo htmlspecialchars($searchTerm ?? ''); ?>" required>
-                        <div class="input-group-append">
-                            <button type="submit" class="btn btn-primary">
-                                <i class="fa fa-search"></i>
-                            </button>
-                        </div>
-                    </div>
-                </form>
+    <!-- Form tìm kiếm -->
+    <form action="/search" method="GET" style="position: relative;" autocomplete="off">
+    <div class="input-group">
+        <input type="text" class="form-control" name="q" placeholder="Tìm kiếm sản phẩm..."
+               value="<?php echo htmlspecialchars($searchTerm ?? ''); ?>" required>
+        <div class="input-group-append">
+            <button type="submit" class="btn btn-primary">
+                <i class="fa fa-search"></i>
+            </button>
+        </div>
+    </div>
+</form>
+</div>
 
 
 
-            </div>
             <div class="col-lg-4 col-6 text-right">
                 <p class="m-0">Customer Service</p>
                 <h5 class="m-0">0774901624</h5>
@@ -135,7 +140,7 @@ if (!isset($isLoggedIn)) {
                             <a href="/blog" class="nav-item nav-link">Blog</a>
                         </div>
                         <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
-                            <a href="/favorite_product.php" class="btn px-0">
+                            <a href="/favorite-products" class="btn px-0">
                                 <i class="fas fa-heart text-primary"></i>
                                 <span class="badge text-secondary border border-secondary rounded-circle"
                                     style="padding-bottom: 2px;">0</span>
@@ -150,6 +155,10 @@ if (!isset($isLoggedIn)) {
                                     Xin chào, <?php echo htmlspecialchars($user['full_name']); ?>
                                 </span>
                                 <a href="/logout" class="btn btn-outline-light btn-sm ml-2">Đăng xuất</a>
+                                <?php if (isset($user['role']) && strtolower($user['role']) === 'admin'): ?>
+                                    <!-- Nút chuyển đến trang admin -->
+                                    <a href="/admin" class="btn btn-outline-primary btn-sm ml-2">Trang Admin</a>
+                                <?php endif; ?>
                             <?php else: ?>
                                 <a href="/login" class="user-login text-white px-0 ml-3">
                                     <i class="fas fa-user text-primary"></i> Đăng nhập
@@ -163,9 +172,6 @@ if (!isset($isLoggedIn)) {
         </div>
     </div>
     <!-- Navbar End -->
-
-
-
 </body>
 
 </html>

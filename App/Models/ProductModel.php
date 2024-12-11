@@ -7,9 +7,11 @@ use Config\Database;
 
 class ProductModel {
     private $db;
-
+    private PDO $pdo;
     public function __construct() {
-        $this->db = (new Database())->connect();  // Sử dụng lớp Database đã được import
+        $db = new Database();
+        $this->db = (new Database())->connect();
+        $this->pdo = $db->connect();  // Sử dụng lớp Database đã được import
     }
     
 
@@ -74,15 +76,16 @@ class ProductModel {
     // Tìm kiếm sản phẩm theo từ khóa
     public function searchProducts($searchTerm)
     {
-        // Giả sử tên sản phẩm là 'product_name'
-        $stmt = $this->db->prepare("SELECT * FROM products WHERE product_name LIKE :searchTerm");
-        $stmt->bindValue(':searchTerm', '%' . $searchTerm . '%', PDO::PARAM_STR);
+        // Đảm bảo từ khóa tìm kiếm không chứa ký tự đặc biệt
+        $searchTerm = '%' . $searchTerm . '%'; 
+
+        // Truy vấn tìm kiếm sản phẩm theo tên
+        $stmt = $this->pdo->prepare("SELECT * FROM products WHERE product_name LIKE :searchTerm");
+        $stmt->bindParam(':searchTerm', $searchTerm, PDO::PARAM_STR);
         $stmt->execute();
         
-        // Lấy tất cả kết quả tìm kiếm
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-    
     
     
 
