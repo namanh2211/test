@@ -249,6 +249,11 @@ switch ($requestUri) {
         $adminController->updateUser();
         break;
 
+    case '/list-orders':
+        $adminController = new App\Controllers\Admin\OrderController();
+        $adminController->listOder();
+        break;
+
     default:
         http_response_code(404);
         echo "404 - Page Not Found<br>";

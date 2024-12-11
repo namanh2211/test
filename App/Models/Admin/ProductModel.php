@@ -41,7 +41,7 @@ class ProductModel
                     products.product_name, 
                     products.description, 
                     products.price, 
-                    products.stock, 
+                    products.stock_quantity, 
                     products.image_path, 
                     products.created_at, 
                     categories.category_name AS category_name 
